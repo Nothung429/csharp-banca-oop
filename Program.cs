@@ -30,38 +30,34 @@
 
 //Bonus:
 //visualizzare per ogni cliente, la situazione dei suoi prestiti in formato tabellare.
-Console.WriteLine("Intesa san paolo");
 
-Bank Bank = new Bank();
+Bank myBank = new Bank("Intesa san paolo");
 
-public class Bank
+Console.WriteLine($"benvenuto in {myBank.name}");
+
+Console.WriteLine("Cerca tra i nostri clienti");
+var search = myBank.ClientSearch(Console.ReadLine());
+
+Console.WriteLine("Vuoi aggiungere un cliente? \nsi/no");
+if (Console.ReadLine() == "si")
 {
-    public string name { get; set; }
-
-    List<Client> clientList = new List<Client>();
-
-    List<Loan> loanList = new List<Loan>();
-
-    public Bank()
-    {
-        clientList.Add(new Client(1, "John", "Doe", "12345678910", 1200));
-        clientList.Add(new Client(2, "Mike", "Doe", "12345678910", 1400));
-        clientList.Add(new Client(3, "Alex", "Doe", "12345678910", 1600));
-        clientList.Add(new Client(4, "Smith", "Doe", "12345678910", 1800));
-
-        foreach (var item in clientList)
-        {
-            Console.WriteLine("id: {0}, name: {1}, surname: {2}, cf: {3}, wage: {4}", item.id, item.name, item.surname, item.CF, item.wage);
-        }
-
-        loanList.Add(new Loan(1, "John Doe", 20000, 200, "22 agosto 2001", "22 agosto 2011"));
-        loanList.Add(new Loan(1, "John Doe", 40000, 400, "22 agosto 2001", "22 agosto 2011"));
-        loanList.Add(new Loan(1, "John Doe", 60000, 600, "22 agosto 2001", "22 agosto 2011"));
-        loanList.Add(new Loan(1, "John Doe", 80000, 800, "22 agosto 2001", "22 agosto 2011"));
-
-        foreach (var item in loanList)
-        {
-            Console.WriteLine("id: {0}, client name: {1}, money amount: {2}, mortgage payment: {3}, start date: {4}, end date: {5}", item.id, item.clientName, item.money, item.mortgage, item.startDate, item.endDate);
-        }
-    }
+    Console.WriteLine("Digita il nome:\n");
+    string newClientName = Console.ReadLine();
+    Console.WriteLine("Digita il cognome:\n");
+    string newClientSurname = Console.ReadLine();
+    Console.WriteLine("Digita il codice fiscale:\n");
+    string newClientCf = Console.ReadLine();
+    Console.WriteLine("Digita lo stipendio:\n");
+    int newClientWage = Console.Read();
+    
+    Client nuovo = new Client(newClientName, newClientSurname, newClientCf, newClientWage);
+    myBank.addClient(nuovo);
+    Console.WriteLine($"Riepilogo: {newClientName} {newClientSurname} {newClientCf} {newClientWage}");
+    Console.WriteLine("Cliente registrato");
 }
+
+//Console.WriteLine("Vuoi rimuovere un cliente? \nsi/no");
+//if (Console.ReadLine() == "si")
+//{
+//    myBank.removeClient();
+//}
