@@ -32,32 +32,59 @@
 //visualizzare per ogni cliente, la situazione dei suoi prestiti in formato tabellare.
 
 Bank myBank = new Bank("Intesa san paolo");
-
 Console.WriteLine($"benvenuto in {myBank.name}");
 
-Console.WriteLine("Cerca tra i nostri clienti");
-var search = myBank.ClientSearch(Console.ReadLine());
+Console.WriteLine("Digita 1 per cercare un cliente\nDigita 2 per aggiungere un cliente\nDigita 3 per rimuovere un cliente\nDigita 4 per aggiungere un prestito\nDigita 5 per rimuovere un prestito");
+int digit = Convert.ToInt32(Console.ReadLine());
 
-Console.WriteLine("Vuoi aggiungere un cliente? \nsi/no");
-if (Console.ReadLine() == "si")
+switch (digit)
 {
-    Console.WriteLine("Digita il nome:\n");
-    string newClientName = Console.ReadLine();
-    Console.WriteLine("Digita il cognome:\n");
-    string newClientSurname = Console.ReadLine();
-    Console.WriteLine("Digita il codice fiscale:\n");
-    string newClientCf = Console.ReadLine();
-    Console.WriteLine("Digita lo stipendio:\n");
-    int newClientWage = Console.Read();
-    
-    Client nuovo = new Client(newClientName, newClientSurname, newClientCf, newClientWage);
-    myBank.addClient(nuovo);
-    Console.WriteLine($"Riepilogo: {newClientName} {newClientSurname} {newClientCf} {newClientWage}");
-    Console.WriteLine("Cliente registrato");
-}
+    case 1:
+        Console.WriteLine("Cerca tra i nostri clienti");
+        var search = myBank.ClientSearch(Console.ReadLine());
+        break;
 
-//Console.WriteLine("Vuoi rimuovere un cliente? \nsi/no");
-//if (Console.ReadLine() == "si")
-//{
-//    myBank.removeClient();
-//}
+    case 2:
+        Console.WriteLine("\nDigita il nome:");
+        string newName = Console.ReadLine();
+        Console.WriteLine("\nDigita il cognome:");
+        string newSurname = Console.ReadLine();
+        Console.WriteLine("\nDigita il codice fiscale:");
+        string newCf = Console.ReadLine();
+        Console.WriteLine("\nDigita lo stipendio:");
+        int newWage = Console.Read();
+
+        Client nuovoCliente = new Client(newName, newSurname, newCf, newWage);
+        myBank.addClient(nuovoCliente);
+        Console.WriteLine($"Riepilogo: {newName} {newSurname} {newCf} {newWage}");
+        Console.WriteLine("Cliente registrato");
+        break;
+
+    case 3:
+        //myBank.removeClient();
+        break;
+
+    case 4:
+        Console.WriteLine("\nDigita l'id del cliente:");
+        int newId = Console.Read();
+        Console.WriteLine("\nDigita il nome del cliente:");
+        string newClient = Console.ReadLine();
+        Console.WriteLine("\nDigita i soldi da prestare:");
+        int newMoney = Console.Read();
+        Console.WriteLine("\nDigita il numero di rate:");
+        int newMortgage = Console.Read();
+        Console.WriteLine("\nDigita la data di inizio:");
+        string newStartDate = Console.ReadLine();
+        Console.WriteLine("\nDigita la data di fine:");
+        string newEndDate = Console.ReadLine();
+
+        Loan nuovoPrestito = new Loan(newId, newClient, newMoney, newMortgage, newStartDate, newEndDate);
+        myBank.addLoan(nuovoPrestito);
+        Console.WriteLine($"Riepilogo: {newClient} {newMoney} {newMortgage} {newStartDate} {newEndDate}");
+        Console.WriteLine("Prestito registrato");
+        break;
+
+    case 5:
+        //myBank.removeLoan();
+        break;
+}
